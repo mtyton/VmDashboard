@@ -44,7 +44,7 @@ class VBoxManage(mainManager):
         all_vms = all_vms.splitlines()
         for vm in all_vms:
             if vm in running_vms:
-                print(vm, "is running")
+                print(vm, "is running") # TODO: this will be better yesyes
             else:
                 print(vm, "is not running")
 
@@ -59,9 +59,3 @@ class VBoxManage(mainManager):
     def stop_vm(self, vm_name):
         command = "controlvm " + vm_name + " poweroff"
         return self.run_command(command)
-
-
-vbox = VBoxManage()
-vbox.start_vm('deb')
-vbox.get_all_vm_status()
-vbox.stop_vm('deb')
