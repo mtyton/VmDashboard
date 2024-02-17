@@ -26,7 +26,8 @@ class VBoxManage(mainManager):
         self.vboxmanage = 'D:/vbox/vboxmanage.exe '
 
     def run_command(self, command):
-        result = subprocess.run(self.vboxmanage + command, shell=True, stdout=subprocess.PIPE, text=True)
+        result = subprocess.run(self.vboxmanage + command, shell=True,
+                                stdout=subprocess.PIPE, text=True)
         return result.stdout
 
     def list_virtual_machines(self):
@@ -42,11 +43,13 @@ class VBoxManage(mainManager):
         all_vms = self.list_virtual_machines()
         running_vms = running_vms.splitlines()
         all_vms = all_vms.splitlines()
+        status_list = []
         for vm in all_vms:
             if vm in running_vms:
-                print(vm, "is running") # TODO: this will be better yesyes
+                status_list.append('running')  # TODO: this will be better yes
             else:
-                print(vm, "is not running")
+                status_list.append('not running')
+        return status_list
 
     def get_running_vms(self):
         command = "list runningvms"
