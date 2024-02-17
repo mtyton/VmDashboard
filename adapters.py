@@ -38,17 +38,21 @@ class VBoxManage(mainManager):
         command = "showvminfo " + vm_name
         return self.run_command(command)
 
-    def get_all_vm_status(self):
+    def check_if_running(self, vm):
         running_vms = self.get_running_vms()
-        all_vms = self.list_virtual_machines()
         running_vms = running_vms.splitlines()
+        print(vm)
+        if vm in running_vms:
+            return 'running'
+        else:
+            return 'stopped'
+
+    def get_all_vm_status(self):
+        all_vms = self.list_virtual_machines()
         all_vms = all_vms.splitlines()
         status_list = []
         for vm in all_vms:
-            if vm in running_vms:
-                status_list.append('running')  # TODO: this will be better yes
-            else:
-                status_list.append('not running')
+            status_list.append(self.check_if_running(vm))
         return status_list
 
     def get_running_vms(self):
