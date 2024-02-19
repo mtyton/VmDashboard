@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 router = APIRouter()
 
+
 class VMBasicData(BaseModel):
     uuid: str
     name: str
@@ -19,7 +20,6 @@ class VMDetailedData(BaseModel):
     network: int
 
 
-
 @router.get("/list-vms/")
 async def list_vms() -> list[VMBasicData]:
     data = [
@@ -31,13 +31,5 @@ async def list_vms() -> list[VMBasicData]:
 
 @router.get("/get-vm/{vm_uuid}", response_model=VMDetailedData)
 async def get_vm(vm_uuid: str) -> VMDetailedData:
-    vm = VMDetailedData(
-        uuid=vm_uuid,
-        name="VM1",
-        state="running",
-        cpu=2,
-        memory=2048,
-        disk=20,
-        network=100
-    )
+    vm = VMDetailedData(uuid=vm_uuid, name="VM1", state="running", cpu=2, memory=2048, disk=20, network=100)
     return vm
