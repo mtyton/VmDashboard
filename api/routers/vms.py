@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 router = APIRouter()
 
+
 class VMBasicData(BaseModel):
     uuid: str
     name: str
@@ -17,7 +18,6 @@ class VMDetailedData(BaseModel):
     memory: int
     disk: int
     network: int
-
 
 
 @router.get("/list-vms/")
